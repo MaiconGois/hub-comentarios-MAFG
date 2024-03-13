@@ -1,2 +1,2 @@
 import { CommentComponent} from './Comment/CommentComponent.js';
-CommentComponent.run(component);
+CommentComponent.run();

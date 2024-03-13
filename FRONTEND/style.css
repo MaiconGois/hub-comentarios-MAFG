@@ -8,10 +8,12 @@ body {
     max-width: 400px;
     margin: 50px auto;
     padding: 20px;
-    color: brown;
+    color: rgb(8, 2, 2);
     font-weight: bolder;
-    border: 3px solid black;
+    /* border: 0.9px solid black; */
     border-radius: 10px;
+    background-color: rgba(164, 172, 180, 0.632);
+    
 }
 
 .comments *{
@@ -21,23 +23,27 @@ body {
 .comments label {
     margin-top: 10px;
     margin-bottom: 10px;
+    
 }
+
 
 #form-comentario textarea, input {
     display: block;
     color: rgb(17, 35, 41);
     border-radius: 5px;
-    border: 1px solid black;
-    background-color: antiquewhite;
+    border: 1px solid rgba(234, 221, 221, 0.393);
+    background-color: rgba(198, 159, 108, 0.692);
 }
 
 #form-comentario .btn-submit{
     margin-top: 25px;
     padding: 10px;
     width: 100px;
+    background-color: rgba(100, 61, 35, 0.689);
 }
 
 #form-comentario form{
     margin: 10px auto 0px auto;
     padding: 10px auto 0px auto;
+    
 }
