@@ -1,5 +1,5 @@
-import { formatDate } from "../utils.js";
-import { gerarCorAleatorio } from "../utils.js";
+import { formatDate, gerarCorAleatorioClara } from "../utils.js";
+import { gerarCorAleatorioEscura } from "../utils.js";
 import { CommentService } from "../services/comment.services.js";
 import { Comment } from "../models/comment.model.js";
 
@@ -66,8 +66,8 @@ const displayComment = (comments) => {
                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
                 preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>comentário</title>
-                <rect width="100%" height="100%" fill= "${gerarCorAleatorio()}"></rect>
-                <text x="30%" y="50%" fill="#000000"dy=".3em">${item
+                <rect width="100%" height="100%" fill= "${gerarCorAleatorioEscura()}"></rect>
+                <text x="30%" y="50%" fill="${gerarCorAleatorioClara()}"dy=".3em">${item
                   .getAuthor()
                   .charAt(0)}</text>
             </svg>
