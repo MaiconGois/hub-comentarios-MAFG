@@ -1,19 +1,20 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: rgb(198, 195, 192);
 }
 
 .comments {
     text-align: left;
     width: 400px;
     max-width: 400px;
-    margin: 50px auto;
+    margin: 20px auto;
     padding: 20px;
-    color: rgb(8, 2, 2);
-    font-weight: bolder;
-    /* border: 0.9px solid black; */
+    color: rgb(53, 46, 46);
+    /* border: 1px solid rgba(0, 0, 0, 0.2); */
     border-radius: 10px;
-    background-color: rgba(164, 172, 180, 0.632);
-    
+    font-weight: bold;
+    background-color:aliceblue;
+  
 }
 
 .comments *{
@@ -23,27 +24,34 @@ body {
 .comments label {
     margin-top: 10px;
     margin-bottom: 10px;
-    
 }
-
 
 #form-comentario textarea, input {
     display: block;
     color: rgb(17, 35, 41);
     border-radius: 5px;
-    border: 1px solid rgba(234, 221, 221, 0.393);
-    background-color: rgba(198, 159, 108, 0.692);
+    border: none;
+    background-color: rgb(240, 205, 159);
+    padding: 5px;
 }
 
 #form-comentario .btn-submit{
     margin-top: 25px;
     padding: 10px;
     width: 100px;
-    background-color: rgba(100, 61, 35, 0.689);
+}
+
+#form-comentario{
+    height: fit-content;
 }
 
 #form-comentario form{
     margin: 10px auto 0px auto;
     padding: 10px auto 0px auto;
-    
+}
+
+.date-style{
+    display: inline;
+    font-size: smaller;
+    height: fit-content;
 }

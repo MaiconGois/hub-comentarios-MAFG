@@ -10,4 +10,13 @@ const formatDate = (data) =>{
     let formattedDate = currentDate.toLocaleDateString('pt-BR',options)
     return formattedDate.replace(',', ' às') + 'hs';
 }
-export{formatDate};
+
+
+const gerarCorAleatorio = () => {
+    return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
+      Math.random() * 255
+    )}, ${Math.floor(Math.random() * 255)})`;
+  };
+
+
+export {gerarCorAleatorio, formatDate}
