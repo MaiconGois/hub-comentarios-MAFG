@@ -27,8 +27,8 @@ db.connect((err) => {
     console.log('Conectado com sucesso!');
 })
 
-server.get('/comment', (req, res) => {
-    db.query('SELECT * FROM comment', (err, results) => {
+server.get('/user', (req, res) => {
+    db.query('SELECT * FROM user', (err, results) => {
         if (err) {
             res.status(500).json({ success: false, error: 'Internal server error' });
             return;

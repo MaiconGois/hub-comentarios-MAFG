@@ -42,4 +42,5 @@ const gerarCorAleatorioClara = () => {
   return corClara[Math.floor(Math.random() * corClara.length)];
 };
 
+
 export { gerarCorAleatorioEscura, gerarCorAleatorioClara, formatDate };
