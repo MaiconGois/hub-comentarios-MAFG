@@ -11,12 +11,6 @@ const formatDate = (data) => {
   return formattedDate.replace(",", " às") + "hs";
 };
 
-// const gerarCorAleatorio = () => {
-//   return `rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(
-//     Math.random() * 255
-//   )}, ${Math.floor(Math.random() * 255)})`;
-// };
-
 const gerarCorAleatorioEscura = () => {
   let corEscura = [
     "#1a1a40",
