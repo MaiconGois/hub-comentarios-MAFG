@@ -1,5 +1,5 @@
-import { User } from "../models/user.model.js";
-import { LoginService } from "../services/login.services.js";
+import { User } from "../models/usermodel.js";
+import { LoginService } from "../services/loginservices.js";
 
 const getLoginInputs = () => {
   return {

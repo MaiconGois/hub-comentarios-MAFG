@@ -1,10 +1,11 @@
-import { formatDate, gerarCorAleatorioClara } from "../utils.js";
-import { gerarCorAleatorioEscura } from "../utils.js";
-import { CommentService } from "../services/comment.services.js";
-import { Comment } from "../models/comment.model.js";
-
-
-
+import {
+  formatDate,
+  gerarCorAleatorioClara,
+  gerarCorAleatorioEscura,
+} from "../utils.js";
+import { CommentService } from "../services/commentservices.js";
+import { UserService } from "../services/userservices.js";
+import { Comment } from "../models/commentmodel.js";
 
 const getInputComment = () => {
   return {
@@ -30,14 +31,16 @@ const submitComment = (event) => {
   event.preventDefault();
   const comment = getInputCommentValue();
 
-  //requisção Post para enviar o comment
-
   loadComment();
 };
 
 const loadComment = () => {
-  // Dados carregados da API
-  CommentService.apiGetComment()
+  UserService.getUserInfo()
+    .then((userInfo) => {
+      const authorName = `${userInfo.firstname}`;
+      setInputComment(authorName, "");
+      return CommentService.apiGetComment();
+    })
     .then((result) => {
       const comments = result.map(
         (comment) =>
@@ -57,7 +60,6 @@ const loadComment = () => {
     });
 };
 
-
 const displayComment = (comments) => {
   const divFeed = document.getElementById("comment-feed");
   divFeed.innerHTML = ``;
@@ -71,11 +73,11 @@ const displayComment = (comments) => {
                 <title>comentário</title>
                 <rect width="100%" height="100%" fill= "${gerarCorAleatorioEscura()}"></rect>
                 <text x="30%" y="50%" fill="${gerarCorAleatorioClara()}"dy=".3em">${item
-                  .getAuthor()
-                  .charAt(0)}</text>
+      .getAuthor()
+      .split(' ')[0].charAt(0)}</text>
             </svg>
             <p class="pb-3 mb-0 small lh-sm text-gray-dark">
-                <strong class="d-block text-gray-dark">@${item.getAuthor()}
+                <strong class="d-block text-gray-dark">@${item.getAuthor().split(' ')[0]}
                 <span class="date-style badge text-bg-secondary">${formatDate(
                   item.getCreatedAt()
                 )}</span>
@@ -88,6 +90,7 @@ const displayComment = (comments) => {
     divFeed.appendChild(divDisplay);
   });
 };
+
 let _user = new User();
 const CommentComponent = {
   run: () => {
@@ -97,9 +100,9 @@ const CommentComponent = {
       loadComment();
     };
   },
-  params: (usr)=>{
-    _user = usr
-  }
+  params: (usr) => {
+    _user = usr;
+  },
 };
 
 export { CommentComponent };
