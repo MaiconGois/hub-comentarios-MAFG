@@ -15,36 +15,48 @@
     <div class="container text-center">
         <div class="row ">
             <div class="col">
-                <div class="comments card shadow-lg" id="login-form">
+                <div class="comments login-form custom-width shadow-lg" id="login-form">
                     <h2>Login</h2>
-                    <form id="formLogin">
-                        <input type="text" name="username" id="username" placeholder="seu login aqui..." required>
-                        <input type="password" placeholder="senha..." name="password" id="password" required>
-                        <button class="btn btn-dark my-2" type="submit"> Enviar </button>
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                 required>
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary " id="loginButton">Entrar</button>
+                        </div>
                     </form>
                 </div>
-                <div class="comments rounded shadow-lg disabled"  id="form-comentario">
+                <div class="comments rounded shadow-lg disabled" id="form-comentario">
                     <h3>Novo Comentário</h3>
                     <form id="formComment">
                         <label for="autor">Autor</label>
                         <input type="text" name="autor" id="inputAuthor" required>
                         <label for="comentario">Digite seu comentário</label>
-                        <textarea name="comentario" id="inputComment" cols="30" rows="10" required></textarea>
-                        <button type="submit" class="btn btn-dark my-2">Enviar</button>
+                        <textarea name="comentario" id="inputComment"  rows="10" required></textarea>
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary ">Enviar</button>
+                        </div>
                     </form>
                 </div>
             </div>
             <!-- DISPLAY COMMENTS -->
-<div class="comments p-3 bg-body rounded shadow-lg">
-            <h3 class="border-bottom pb-2 mb-0">Feed</h3>
-            <div id="comment-feed">
+            <div class="comments p-3 bg-body rounded shadow-lg">
+                <h3 class="border-bottom pb-2 mb-0">Feed</h3>
+                <div id="comment-feed">
 
+                </div>
+                <small class="d-block text-end mt-3">
+                    <a href="#">All updates</a>
+                </small>
             </div>
-            <small class="d-block text-end mt-3">
-                <a href="#">All updates</a>
-            </small>
         </div>
-    </div>
     </div>
     </div>
 

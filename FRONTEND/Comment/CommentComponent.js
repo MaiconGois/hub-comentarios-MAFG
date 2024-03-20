@@ -2,6 +2,7 @@ import { formatDate, gerarCorAleatorioClara } from "../utils.js";
 import { gerarCorAleatorioEscura } from "../utils.js";
 import { CommentService } from "../services/comment.services.js";
 import { Comment } from "../models/comment.model.js";
+import { User } from "../models/user.model.js";
 
 
 
@@ -30,7 +31,6 @@ const submitComment = (event) => {
   event.preventDefault();
   const comment = getInputCommentValue();
 
-  //requisção Post para enviar o comment
 
   loadComment();
 };

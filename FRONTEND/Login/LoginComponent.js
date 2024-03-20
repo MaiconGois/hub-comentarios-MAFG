@@ -12,7 +12,7 @@ const handleLogin = (event) => {
   event.preventDefault();
 
   const { username, password } = getLoginInputs();
-  const user = new User(null, username.value, password.value);
+  const user = new User(null, username.value, password.value, null, null);
 
   LoginService.apiAuthLogin(user)
     .then((result) => {
@@ -44,8 +44,8 @@ const handleShowHide = () => {
 
 const LoginComponent = {
   run: () => {
-    const formLogin = document.getElementById("formLogin");
-    formLogin.addEventListener("submit", handleLogin);
+    const formLogin = document.getElementById('loginForm');
+    formLogin.addEventListener('submit', handleLogin);
   },
 };
 
