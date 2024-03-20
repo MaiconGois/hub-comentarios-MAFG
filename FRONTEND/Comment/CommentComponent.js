@@ -3,6 +3,9 @@ import { gerarCorAleatorioEscura } from "../utils.js";
 import { CommentService } from "../services/comment.services.js";
 import { Comment } from "../models/comment.model.js";
 
+
+
+
 const getInputComment = () => {
   return {
     author: document.getElementById("inputAuthor"),
@@ -85,7 +88,7 @@ const displayComment = (comments) => {
     divFeed.appendChild(divDisplay);
   });
 };
-
+let _user = new User();
 const CommentComponent = {
   run: () => {
     const formComentario = document.getElementById("formComment");
@@ -94,6 +97,9 @@ const CommentComponent = {
       loadComment();
     };
   },
+  params: (usr)=>{
+    _user = usr
+  }
 };
 
 export { CommentComponent };
