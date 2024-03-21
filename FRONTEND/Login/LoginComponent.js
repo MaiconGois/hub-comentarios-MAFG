@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import { LoginService } from "../services/login.services.js";
+import { setInputComment } from "../Comment/CommentComponent.js";
 
 const getLoginInputs = () => {
   return {
@@ -21,6 +22,13 @@ const handleLogin = (event) => {
       user.setPassword(null);
       user.setFirstname(result.firstname);
       user.setLastname(result.lastname);
+
+      const inputAuthor = document.getElementById('InputAuthor');
+      inputAuthor.value = result.firstname + " " + result.lastname;
+      setInputComment(`${result.firstname} ${result.lastname}`, "");
+      inputAuthor.disabled = true;
+      inputAuthor.style.backgroundColor = "white";
+
       handleShowHide();
     })
     .catch((error) => {
@@ -44,8 +52,8 @@ const handleShowHide = () => {
 
 const LoginComponent = {
   run: () => {
-    const formLogin = document.getElementById('loginForm');
-    formLogin.addEventListener('submit', handleLogin);
+    const formLogin = document.getElementById("loginForm");
+    formLogin.addEventListener("submit", handleLogin);
   },
 };
 

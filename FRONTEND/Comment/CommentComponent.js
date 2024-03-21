@@ -58,6 +58,7 @@ const loadComment = () => {
 };
 
 
+
 const displayComment = (comments) => {
   const divFeed = document.getElementById("comment-feed");
   divFeed.innerHTML = ``;
@@ -88,7 +89,9 @@ const displayComment = (comments) => {
     divFeed.appendChild(divDisplay);
   });
 };
-let _user = new User();
+
+
+
 const CommentComponent = {
   run: () => {
     const formComentario = document.getElementById("formComment");
@@ -97,9 +100,8 @@ const CommentComponent = {
       loadComment();
     };
   },
-  params: (usr)=>{
-    _user = usr
-  }
+  
 };
 
-export { CommentComponent };
+export { CommentComponent};
+export {setInputComment}
