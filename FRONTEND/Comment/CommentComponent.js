@@ -4,9 +4,6 @@ import { CommentService } from "../services/comment.services.js";
 import { Comment } from "../models/comment.model.js";
 import { User } from "../models/user.model.js";
 
-
-
-
 const getInputComment = () => {
   return {
     author: document.getElementById("inputAuthor"),
@@ -20,10 +17,15 @@ const setInputComment = (authorValue, commentValue) => {
   comment.value = commentValue;
 };
 
+const clearCommentField = () => {
+  const { comment } = getInputComment();
+  comment.value = "";
+};
+
 const getInputCommentValue = () => {
   return {
     author: document.getElementById("inputAuthor").value,
-    comment: document.getElementById("inputComment").value,
+    comment_text: document.getElementById("inputComment").value,
   };
 };
 
@@ -31,8 +33,15 @@ const submitComment = (event) => {
   event.preventDefault();
   const comment = getInputCommentValue();
 
-
-  loadComment();
+  CommentService.apiPostComment(comment)
+    .then((result) => {
+      alert(result);
+      loadComment();
+      clearCommentField();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 const loadComment = () => {
@@ -57,8 +66,6 @@ const loadComment = () => {
     });
 };
 
-
-
 const displayComment = (comments) => {
   const divFeed = document.getElementById("comment-feed");
   divFeed.innerHTML = ``;
@@ -72,8 +79,8 @@ const displayComment = (comments) => {
                 <title>comentário</title>
                 <rect width="100%" height="100%" fill= "${gerarCorAleatorioEscura()}"></rect>
                 <text x="30%" y="50%" fill="${gerarCorAleatorioClara()}"dy=".3em">${item
-                  .getAuthor()
-                  .charAt(0)}</text>
+      .getAuthor()
+      .charAt(0)}</text>
             </svg>
             <p class="pb-3 mb-0 small lh-sm text-gray-dark">
                 <strong class="d-block text-gray-dark">@${item.getAuthor()}
@@ -90,8 +97,6 @@ const displayComment = (comments) => {
   });
 };
 
-
-
 const CommentComponent = {
   run: () => {
     const formComentario = document.getElementById("formComment");
@@ -100,8 +105,7 @@ const CommentComponent = {
       loadComment();
     };
   },
-  
 };
 
-export { CommentComponent};
-export {setInputComment}
+export { CommentComponent };
+export { setInputComment };

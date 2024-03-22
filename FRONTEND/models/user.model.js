@@ -12,7 +12,7 @@ class User {
       this.firstname = firstname;
       this.lastname = lastname;
     } else if (
-      (username !== undefined, firstname !== undefined, lastname !== undefined)
+      (username !== undefined, password !== undefined)
     ) {
       this.id = null;
       this.username = username;
@@ -43,20 +43,20 @@ class User {
   getLastname() {
     return this.lastname;
   }
-  setId(id) {
-    this.id = id;
+  setId(value) {
+    this.id = value;
   }
-  setUsername(username) {
-    this.username = username;
+  setUsername(value) {
+    this.username = value;
   }
-  setPassword(password) {
-    this.password = password;
+  setPassword(value) {
+    this.password = value;
   }
-  setFirstname(firstname) {
-    this.firstname = firstname;
+  setFirstname(value) {
+    this.firstname = value;
   }
-  setLastname(lastname) {
-    this.lastname = lastname;
+  setLastname(value) {
+    this.lastname = value;
   }
 }
 export {User}

@@ -13,23 +13,25 @@ const handleLogin = (event) => {
   event.preventDefault();
 
   const { username, password } = getLoginInputs();
-  const user = new User(null, username.value, password.value, null, null);
+  const userRequest = {username: username.value, password: password.value}
+  const user = new User(null, username.value, password.value)
 
-  LoginService.apiAuthLogin(user)
+
+  LoginService.apiAuthLogin(userRequest)
     .then((result) => {
       console.log(result);
       user.setId(result.id);
       user.setPassword(null);
       user.setFirstname(result.firstname);
       user.setLastname(result.lastname);
-
-      const inputAuthor = document.getElementById('InputAuthor');
+      handleShowHide();
+      console.log({message:"teste",result:result})
+      const inputAuthor = document.getElementById('inputAuthor');
       inputAuthor.value = result.firstname + " " + result.lastname;
       setInputComment(`${result.firstname} ${result.lastname}`, "");
       inputAuthor.disabled = true;
-      inputAuthor.style.backgroundColor = "white";
+    
 
-      handleShowHide();
     })
     .catch((error) => {
       alert(`Login inválido. Erro:${error.message}`);
