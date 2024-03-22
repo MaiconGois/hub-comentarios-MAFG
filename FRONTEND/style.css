@@ -83,7 +83,9 @@ body {
      margin-top: 20px
  }
  #comment-feed {
+
      max-height: 400px;
      overflow-y: auto;
+     
  }
  
