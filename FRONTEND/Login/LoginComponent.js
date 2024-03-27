@@ -13,9 +13,8 @@ const handleLogin = (event) => {
   event.preventDefault();
 
   const { username, password } = getLoginInputs();
-  const userRequest = {username: username.value, password: password.value}
-  const user = new User(null, username.value, password.value)
-
+  const userRequest = { username: username.value, password: password.value };
+  const user = new User(null, username.value, password.value);
 
   LoginService.apiAuthLogin(userRequest)
     .then((result) => {
@@ -25,31 +24,48 @@ const handleLogin = (event) => {
       user.setFirstname(result.firstname);
       user.setLastname(result.lastname);
       handleShowHide();
-      console.log({message:"teste",result:result})
-      const inputAuthor = document.getElementById('inputAuthor');
+      console.log({ message: "teste", result: result });
+      const inputAuthor = document.getElementById("inputAuthor");
       inputAuthor.value = result.firstname + " " + result.lastname;
       setInputComment(`${result.firstname} ${result.lastname}`, "");
       inputAuthor.disabled = true;
-    
-
     })
     .catch((error) => {
       alert(`Login inválido. Erro:${error.message}`);
     });
   console.log(user);
 };
-
 const handleShowHide = () => {
   const newComponentTag = document.getElementById("form-comentario");
   const loginTag = document.getElementById("login-form");
-
+  const userTag = document.getElementById("user-date");
+  
   if (newComponentTag.classList.contains("disabled")) {
     newComponentTag.classList.remove("disabled");
     loginTag.classList.add("disabled");
+    userTag.classList.add("disabled");
   } else {
     newComponentTag.classList.add("disabled");
     loginTag.classList.remove("disabled");
+    userTag.classList.remove("disabled");
   }
+};
+
+
+const handleUserData = () => {
+  const userTag = document.getElementById("user-date");
+  const commentTag = document.getElementById("form-comentario");
+
+  userTag.classList.add("disabled");
+  commentTag.classList.remove("disabled");
+};
+
+const handleBack = () => {
+  const userTag = document.getElementById("user-date");
+  const commentTag = document.getElementById("form-comentario");
+
+  userTag.classList.remove("disabled");
+  commentTag.classList.add("disabled");
 };
 
 const LoginComponent = {
@@ -58,5 +74,4 @@ const LoginComponent = {
     formLogin.addEventListener("submit", handleLogin);
   },
 };
-
-export { LoginComponent };
+export { LoginComponent, handleBack, handleUserData };

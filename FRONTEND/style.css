@@ -97,4 +97,8 @@ body {
     padding-right: 600px;
    height: 10px;
  }
- 
+ .dropdown {
+    min-width: auto !important;
+    max-width: 200px !important; 
+}
+

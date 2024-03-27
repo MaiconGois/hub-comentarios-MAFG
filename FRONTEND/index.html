@@ -14,27 +14,59 @@
 
 
 
+    <div class="dropdown mt-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="d-flex align-items-center">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle me-2">
+                <div>
+                    <strong class="d-block text-light">@Nume-author</strong>
+                    <span class="date-style badge bg-secondary"></span>
+                </div>
+                <span class="ms-2 caret"></span>
+            </div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" onclick="handleUserData()">Meus Dados</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" >Sair</a></li>
+        </ul>
+    </div>
+    
+
 
     <!-- ADD NEW COMMENT -->
     <div class="container text-center">
         <div class="row ">
             <div class="col">
-                <div class="ddd">
-
-
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                        <img src="/FRONTEND/Login/icons8-usuário-64.png" width="90" height="90"
-                            class="d-inline-block align-top" alt="">
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Meus Dados</a></li>
-                        <li><a class="dropdown-item" href="#">Sair</a></li>
-
-                    </ul>
-
-
+                <div class="comments login-form custom-width disabled" id="user-date">
+                    <h2>Meus Dados</h2>
+                    <form id="userDataForm">
+                        <div class="mb-3">
+                            <label for="firstname" class="form-label">Primeiro Nome</label>
+                            <input type="text" class="form-control" id="firstname" name="firstname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastname" class="form-label">Sobrenome</label>
+                            <input type="text" class="form-control" id="lastname" name="lastname" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário</label>
+                            <input type="text" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary " onclick="handleBack()" id="saveButton">Voltar</button>
+    
+                        </div>
+                    </form>
                 </div>
-
+                
+               
+            
                 <div class="comments login-form custom-width" id="login-form">
                     <h2>Login</h2>
                     <form id="loginForm">
@@ -84,6 +116,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script type="module" src="./script.js"></script>
+    
 </body>
 
 </html>
