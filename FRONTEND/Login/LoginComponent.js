@@ -13,8 +13,7 @@ const handleLogin = (event) => {
   event.preventDefault();
 
   const { username, password } = getLoginInputs();
-  const userRequest = { username: username.value, password: password.value };
-  const user = new User(null, username.value, password.value);
+ 
   const userRequest = { username: username.value, password: password.value };
   const user = new User(null, username.value, password.value);
 
@@ -26,8 +25,7 @@ const handleLogin = (event) => {
       user.setFirstname(result.firstname);
       user.setLastname(result.lastname);
       handleShowHide();
-      console.log({ message: "teste", result: result });
-      const inputAuthor = document.getElementById("inputAuthor");
+      
       console.log({ message: "teste", result: result });
       const inputAuthor = document.getElementById("inputAuthor");
       inputAuthor.value = result.firstname + " " + result.lastname;
@@ -141,21 +139,6 @@ const handleShowHide = () => {
 };
 
 
-const handleUserData = () => {
-  const userTag = document.getElementById("user-date");
-  const commentTag = document.getElementById("form-comentario");
-
-  userTag.classList.add("disabled");
-  commentTag.classList.remove("disabled");
-};
-
-const handleBack = () => {
-  const userTag = document.getElementById("user-date");
-  const commentTag = document.getElementById("form-comentario");
-
-  userTag.classList.remove("disabled");
-  commentTag.classList.add("disabled");
-};
 
 const LoginComponent = {
   run: () => {
