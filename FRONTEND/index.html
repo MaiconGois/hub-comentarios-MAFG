@@ -19,6 +19,25 @@
    
     
 
+    <div class="dropdown mt-2">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="d-flex align-items-center">
+                <img src="https://github.com/mdo.png" alt="mdo" width="50" height="50" class="rounded-circle me-2">
+                <div>
+                    <strong class="d-block text-light">@Nume-author</strong>
+                    <span class="date-style badge bg-secondary"></span>
+                </div>
+                <span class="ms-2 caret"></span>
+            </div>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <li><a class="dropdown-item" href="#" onclick="handleUserData()">Meus Dados</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#" >Sair</a></li>
+        </ul>
+    </div>
+    
+
 
     <!-- ADD NEW COMMENT -->
     <div class="container text-center">
@@ -83,6 +102,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script type="module" src="./script.js"></script>
+    
     
 </body>
 
