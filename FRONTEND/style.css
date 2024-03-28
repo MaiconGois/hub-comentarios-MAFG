@@ -1,7 +1,7 @@
 body {
-    background-color: rgb(153, 139, 124);
+    background-color: rgb(241, 241, 241);
 }
- 
+
 .comments {
     text-align: left;
     width: 400px !important;
@@ -11,13 +11,19 @@ body {
     color: rgb(53, 46, 46);
     border-radius: 10px;
     font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     background-color: #a6c0d3 !important;
 }
-.row{
-    margin-top: 10px;
-    margin-left: 100px;
-   
+
+.row {
+    margin-top: 50px;
 }
+
+.col-lg-4 {
+    margin-top: 10px;
+    text-align: center;
+}
+
 .comments * {
     display: block;
 }
@@ -83,37 +89,9 @@ input {
 #comment-feed {
     max-height: 400px;
     overflow-y: auto;
-}
 
-
-#user-data {
-
-    text-align: center;
-    width: 560px !important;
-    height: 300px !important;
-    margin: 20px auto;
-    padding: 30px;
-    color: rgb(53, 46, 46);
-    border-radius: 10px;
-    background-color: #a6c0d3;
 }
 
 #user-data {
-   width: 500px !important;
+    width: 100% !important;
 }
-#titulo{
-    text-align: center;
-    font-weight: bold;
-    font-size: 30px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    
-}
-#table{
-    margin-top: 25px;
-    margin-bottom: 20px;
-    border-radius: 3000px
-}
-
-
-
