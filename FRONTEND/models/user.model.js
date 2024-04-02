@@ -34,9 +34,7 @@ class User {
   getUsername() {
     return this.username;
   }
-  getPassword() {
-    return this.password;
-  }
+  
   getFirstname() {
     return this.firstname;
   }

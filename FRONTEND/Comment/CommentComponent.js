@@ -52,6 +52,7 @@ const loadComment = () => {
         (comment) =>
           new Comment(
             comment.id,
+            comment.userId,
             comment.author,
             comment.comment_text,
             comment.created_at,
@@ -78,8 +79,7 @@ const displayComment = (comments) => {
                 preserveAspectRatio="xMidYMid slice" focusable="false">
                 <title>comentário</title>
                 <rect width="100%" height="100%" fill= "${gerarCorAleatorioEscura()}"></rect>
-                <text x="30%" y="50%" fill="${gerarCorAleatorioClara()}"dy=".3em">${item
-      .getAuthor()
+                <text x="30%" y="50%" fill="${gerarCorAleatorioClara()}"dy=".3em">${item.getAuthor()
       .charAt(0)}</text>
             </svg>
             <p class="pb-3 mb-0 small lh-sm text-gray-dark">

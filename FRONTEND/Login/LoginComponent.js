@@ -1,6 +1,7 @@
 import { User } from "../models/user.model.js";
 import { LoginService } from "../services/login.services.js";
 import { setInputComment } from "../Comment/CommentComponent.js";
+import { StorageServices } from "../services/localStorage.service.js";
 
 const getLoginInputs = () => {
   return {
@@ -19,6 +20,12 @@ const handleLogin = (event) => {
 
   LoginService.apiAuthLogin(userRequest)
     .then((result) => {
+      curretUser = new User(result)
+      curretUser.setPassword(null)
+
+StorageServices.user.store(result)
+console.log(StorageServices.user.get());
+
       console.log(result);
       user.setId(result.id);
       user.setPassword(null);
@@ -110,7 +117,6 @@ const handleLogin = (event) => {
 const userDate = () => {
   const dadosUser = document.getElementById("dadosUser");
   const newComponentTag = document.getElementById("form-comentario");
-  const loginTag = document.getElementById("login-form");
   const feedTag = document.getElementById("feed-Comment");
   if (dadosUser.classList.contains("disabled")) {
     dadosUser.classList.remove("disabled");
@@ -166,4 +172,4 @@ const LoginComponent = {
   },
 };
 
-export { LoginComponent, handleBack, handleUserData };
+export { LoginComponent, handleBack, userDate, handleLogout };
