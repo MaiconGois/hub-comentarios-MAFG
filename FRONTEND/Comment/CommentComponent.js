@@ -1,5 +1,4 @@
-import { formatDate, gerarCorAleatorioClara } from "../utils.js";
-import { gerarCorAleatorioEscura } from "../utils.js";
+import { formatDate, gerarCorAleatorioClara, gerarCorAleatorioEscura } from "../utils.js";
 import { CommentService } from "../services/comment.services.js";
 import { Comment } from "../models/comment.model.js";
 import { User } from "../models/user.model.js";
@@ -107,5 +106,4 @@ const CommentComponent = {
   },
 };
 
-export { CommentComponent };
-export { setInputComment };
+export { CommentComponent, setInputComment };

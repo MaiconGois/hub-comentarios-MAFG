@@ -14,25 +14,24 @@ const handleLogin = (event) => {
   event.preventDefault();
 
   const { username, password } = getLoginInputs();
- 
+
   const userRequest = { username: username.value, password: password.value };
   const user = new User(null, username.value, password.value);
 
   LoginService.apiAuthLogin(userRequest)
     .then((result) => {
-      curretUser = new User(result)
-      curretUser.setPassword(null)
+      curretUser = new User(result);
+      curretUser.setPassword(null);
 
-StorageServices.user.store(result)
-console.log(StorageServices.user.get());
+      StorageServices.user.store(result);
+      console.log(StorageServices.user.get());
 
-      console.log(result);
       user.setId(result.id);
       user.setPassword(null);
       user.setFirstname(result.firstname);
       user.setLastname(result.lastname);
       handleShowHide();
-      
+
       console.log({ message: "teste", result: result });
       const inputAuthor = document.getElementById("inputAuthor");
       inputAuthor.value = result.firstname + " " + result.lastname;
@@ -133,7 +132,7 @@ const handleShowHide = () => {
   const newComponentTag = document.getElementById("form-comentario");
   const loginTag = document.getElementById("login-form");
   const userTag = document.getElementById("user-date");
-  
+
   if (newComponentTag.classList.contains("disabled")) {
     newComponentTag.classList.remove("disabled");
     loginTag.classList.add("disabled");
@@ -149,19 +148,17 @@ const handleBack = () => {
   const dadosUser = document.getElementById("dadosUser");
   const feedTag = document.getElementById("feed-Comment");
   const newComponentTag = document.getElementById("form-comentario");
-  
+
   dadosUser.classList.add("disabled");
   feedTag.classList.remove("disabled");
   newComponentTag.classList.remove("disabled");
 };
 
 const handleLogout = () => {
-  
   const loginTag = document.getElementById("login-form");
-  const newComponentTag = document.getElementById("form-comentario")
+  const newComponentTag = document.getElementById("form-comentario");
 
-
-  loginTag.classList.remove("disabled"); 
+  loginTag.classList.remove("disabled");
   newComponentTag.classList.add("disabled");
 };
 
