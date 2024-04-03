@@ -93,7 +93,7 @@ server.get("/user-comment", (req, res) => {
         .status(500)
         .json({ success: false, error: "Internal server error" });
      }else if (result.length <= 0) {
-      return res.status(500).json({ success: false, error: "Nenhum dados " });
+      return res.status(500).json({ success: false, error: "Não tem seus comentários" });
      } else {
       return res.json({ success: true, comments: result });
     }
