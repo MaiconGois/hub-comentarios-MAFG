@@ -1,14 +1,15 @@
-import { User } from "../models/user.model.js";
-import { LoginService } from "../services/login.services.js";
+import { User } from "../../models/user.model.js";
+import { LoginService } from "../../services/login.services.js";
 import { setInputComment } from "../Comment/CommentComponent.js";
-import { StorageServices } from "../services/localStorage.service.js";
+import { StorageServices } from "../../services/localStorage.service.js";
 
 const getLoginInputs = () => {
   return {
-    username: document.getElementById("username"),
-    password: document.getElementById("password"),
-  };
-};
+      username: document.getElementById('username'),
+      password: document.getElementById('password')
+  }
+}
+
 
 const handleLogin = (event) => {
   event.preventDefault();
@@ -113,46 +114,25 @@ const handleLogin = (event) => {
   console.log(user);
 };
 
-const userDate = () => {
-  const dadosUser = document.getElementById("dadosUser");
-  const newComponentTag = document.getElementById("form-comentario");
-  const feedTag = document.getElementById("feed-Comment");
-  if (dadosUser.classList.contains("disabled")) {
-    dadosUser.classList.remove("disabled");
-    feedTag.classList.add("disabled");
-    newComponentTag.classList.add("disabled");
-  } else {
-    dadosUser.classList.add("disabled");
-    newComponentTag.classList.remove("disabled");
-    feedTag.classList.remove("disabled");
-  }
-};
+
 
 const handleShowHide = () => {
-  const newComponentTag = document.getElementById("form-comentario");
-  const loginTag = document.getElementById("login-form");
-  const userTag = document.getElementById("user-date");
-
-  if (newComponentTag.classList.contains("disabled")) {
-    newComponentTag.classList.remove("disabled");
-    loginTag.classList.add("disabled");
-    userTag.classList.add("disabled");
+  const newCommentTag = document.getElementById('form-comentario');
+  const loginTag = document.getElementById('login-form');
+  const userTag = document.getElementById('user-date')
+ 
+  if (newCommentTag.classList.contains('disabled')) {
+      newCommentTag.classList.remove('disabled');
+      userTag.classList.remove('disabled');
+      loginTag.classList.add('disabled');
   } else {
-    newComponentTag.classList.add("disabled");
-    loginTag.classList.remove("disabled");
-    userTag.classList.remove("disabled");
+      newCommentTag.classList.add('disabled');
+      userTag.classList.add('disabled');
+      loginTag.classList.remove('disabled');
   }
-};
+}
 
-const handleBack = () => {
-  const dadosUser = document.getElementById("dadosUser");
-  const feedTag = document.getElementById("feed-Comment");
-  const newComponentTag = document.getElementById("form-comentario");
 
-  dadosUser.classList.add("disabled");
-  feedTag.classList.remove("disabled");
-  newComponentTag.classList.remove("disabled");
-};
 
 const handleLogout = () => {
   const loginTag = document.getElementById("login-form");
@@ -169,4 +149,4 @@ const LoginComponent = {
   },
 };
 
-export { LoginComponent, handleBack, userDate, handleLogout };
+export { LoginComponent, handleLogout };

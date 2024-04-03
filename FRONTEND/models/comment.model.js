@@ -34,6 +34,9 @@ class Comment {
     getId() {
         return this.id;
     }
+    getUserId() {
+        return this.userId;
+    }
     getAuthor() {
         return this.author;
     }
@@ -52,9 +55,6 @@ class Comment {
     }
     getUpdatedAt() {
         return this.updated_at;
-    }
-    getUser() {
-        return this.userId;
     }
 }
 export { Comment }

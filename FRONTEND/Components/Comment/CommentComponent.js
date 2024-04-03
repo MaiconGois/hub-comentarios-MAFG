@@ -1,18 +1,17 @@
-import { formatDate, gerarCorAleatorioClara, gerarCorAleatorioEscura } from "../utils.js";
-import { CommentService } from "../services/comment.services.js";
-import { Comment } from "../models/comment.model.js";
-import { User } from "../models/user.model.js";
+import { formatDate, gerarCorAleatorioClara, gerarCorAleatorioEscura } from "../../utils.js";
+import { CommentService } from "../../services/comment.services.js";
+import { Comment } from "../../models/comment.model.js";
+import { User } from "../../models/user.model.js";
+import { StorageServices } from "../../services/localStorage.service.js";
 
-const getInputComment = () => {
-  return {
-    author: document.getElementById("inputAuthor"),
-    comment: document.getElementById("inputComment"),
-  };
+const getCommentInput = () => {
+  return document.getElementById("inputComment")
+  
 };
 
-const setInputComment = (authorValue, commentValue) => {
-  const { author, comment } = getInputComment();
-  author.value = authorValue;
+const setInputComment = ( commentValue) => {
+  const {comment } = getCommentInput();
+
   comment.value = commentValue;
 };
 
@@ -22,16 +21,16 @@ const clearCommentField = () => {
 };
 
 const getInputCommentValue = () => {
-  return {
-    author: document.getElementById("inputAuthor").value,
-    comment_text: document.getElementById("inputComment").value,
-  };
-};
+  return document.getElementById("inputComment").value
+  
+}
 
 const submitComment = (event) => {
   event.preventDefault();
-  const comment = getInputCommentValue();
-
+  const comment = {
+    userId: StorageServices.user.get().getId(),
+    comment_text: getInputCommentValue()
+};
   CommentService.apiPostComment(comment)
     .then((result) => {
       alert(result);
