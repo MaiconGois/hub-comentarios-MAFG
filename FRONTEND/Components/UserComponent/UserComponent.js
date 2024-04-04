@@ -1,5 +1,6 @@
 import { StorageServices } from "../../services/localStorage.service.js";
-import { randomColors } from "../../utils.js";
+import UserService from "../../services/user.services.js";
+import { formatDate, randomColors } from "../../utils.js";
 
 const loadUserData = () => {
 
@@ -21,6 +22,50 @@ fill="none">
 <div>
 `
 }
+const handleMeusComentarios = ()=> {
+    const userId = StorageServices.user.get().getId();
+    UserService.apiGetUserComments().then(data => {
+        displayUserComment(data)
+    }).catch(err => {
+       alert(err.message)
+    })
+}
+
+
+const displayUserComment = (comments) => {
+    const userComment = document.getElementById('comment-feed');
+    userComment.innerHTML = `<h5 class="border-bottom pb-2 mb-0">Meus Comentários</h5>`
+    comments.forEach(item => {
+        const divDisplay1 = document.createElement('div');
+        divDisplay1.className = 'd-flex text-body-secondary pt-3 border-bottom'
+        divDisplay1.innerHTML = `
+            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
+                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
+                preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>comentário</title>
+                <rect width="100%" height="100%" fill="#${randomColors().dark}"></rect>
+                <text x="35%" y="50%" fill="#${randomColors().light}"dy=".3em">${item.getAuthor().charAt(0)}</text>
+            </svg>
+            <p class="pb-3 mb-0 small lh-sm text-gray-dark">
+                <strong class="d-block text-gray-dark">@${item.getAuthor()}
+                <span class="date-style badge text-bg-secondary">${formatDate(item.getCreatedAt())}</span>
+                </strong>
+                <span class="comment">
+                ${item.getComment()}
+                </span>
+            </p>        
+        `
+        userComment.appendChild(divDisplay1);
+        const btnVerLista = document.getElementById('btnVerLista')
+        btnVerLista.addEventListener('click',handleMeusComentarios())
+        
+
+    })    
+    
+}    
+
+
+
 
 const displayUserData = (user) => {
     const userContent = document.getElementById('user-content');
@@ -56,43 +101,9 @@ const displayUserData = (user) => {
     userContent.appendChild(newDiv)
 
 }
-const listcomment = ()=>{
-    const userContent = document.getElementById('user-content');
-    userContent.innerHTML = ``
-    const newDiv = document.createElement('div');
-    newDiv.innerHTML = `
-    <table class="table">
-  <thead class="thead-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Nome</th>
-      <th scope="col">Comentário</th>
-      <th scope="col">Data</th>
-      <th scope="col">Horário</th>
-      
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope=${user.getId()}></th>
-      <td>${user.getUsername()}</td>
-      <td>${user.getCreatedAt()}</td>
-      <td>${user.formatDate(Date)}</td>
-      <td>${0}</td>
-    </tr>
-   
-  </tbody>
-</table>
-
-
-    `
 
 
 
-
-
-
-}
 const handleShowHideUser = () => {
     const userDataTag = document.getElementById('user-data');
     const newCommentTag = document.getElementById('form-comentario');

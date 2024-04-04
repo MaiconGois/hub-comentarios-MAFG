@@ -78,8 +78,8 @@ server.get("/comment", (req, res) => {
   });
 });
 
-server.get("/user-comment", (req, res) => {
-  const { userId } = req.body;
+server.get("/user-comment/:userId", (req, res) => {
+  const  userId  = req.params.userId;
   const query = `
   SELECT comment.id, user.username as author, comment.comment_text, comment.created_at, comment.updated_at
   FROM comment
