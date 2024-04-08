@@ -57,7 +57,7 @@ server.get("/user", (req, res) => {
   });
 });
 
-// LISTAR COMENTÁRIOS
+
 server.get("/comment", (req, res) => {
   const queryByUser = `SELECT comment.id,
                             user.username as author,
@@ -93,15 +93,13 @@ server.get("/user-comment/:userId", (req, res) => {
         .status(500)
         .json({ success: false, error: "Internal server error" });
      }else if (result.length <= 0) {
-      return res.status(500).json({ success: false, error: "Não tem seus comentários" });
+      return res.status(500).json({ success: false, error: "Não tem seus comentários no bancos de dados" });
      } else {
       return res.json({ success: true, comments: result });
     }
   });
 });
 
-
-// ADICIONAR COMMENT
 
 server.post("/comment", (req, res) => {
   const { userId, comment_text } = req.body;
