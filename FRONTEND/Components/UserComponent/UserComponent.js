@@ -1,6 +1,7 @@
 import { StorageServices } from "../../services/localStorage.service.js";
 import UserService from "../../services/user.services.js";
 import { formatDate, randomColors } from "../../utils.js";
+import { loadComment } from "../CommentComponent/CommentComponent.js";
 
 const loadUserData = () => {
 
@@ -22,17 +23,6 @@ fill="none">
 <div>
 `
 }
-const handleMeusComentarios = ()=> {
-    const userId = StorageServices.user.get().getId();
-    UserService.apiGetUserComments(userId).then(data => {
-        displayUserComment(data)
-    }).catch(err => {
-       alert(err.message)
-    })
-}
-
-
-
 
 
 
@@ -41,7 +31,9 @@ const displayUserData = (user) => {
     userContent.innerHTML = ``
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
+
     ${iconeUsuario(randomColors().dark)}
+    
     <div class="row d-inline-flex text-body-secondary rounded">
         <div class="col-4">
             <label class="form-label" for="user_name">Nome</label>
@@ -68,19 +60,30 @@ const displayUserData = (user) => {
     </div>`
 
     userContent.appendChild(newDiv)
+   
     const btnVerLista = document.getElementById('btnVerLista')
-    btnVerLista.addEventListener('click',handleMeusComentarios())
+    btnVerLista.addEventListener('click',handleMeusComentarios)
+}
 
+const handleMeusComentarios = ()=> {
+    const userId = StorageServices.user.get().getId();
+    UserService.apiGetUserComments(userId).then(data => {
+        displayUserComment(data)
+    }).catch(err => {
+       alert(err.message)
+    })
 }
 
 
 const displayUserComment = (comments) => {
     const userComment = document.getElementById('comment-feed');
+    userComment.innerHTML = ``
     userComment.innerHTML = `<h5 class="border-bottom pb-2 mb-0">Meus Comentários</h5>`
     comments.forEach(item => {
         const divDisplay1 = document.createElement('div');
         divDisplay1.className = 'd-flex text-body-secondary pt-3 border-bottom'
         divDisplay1.innerHTML = `
+
             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
                 xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
                 preserveAspectRatio="xMidYMid slice" focusable="false">
@@ -98,9 +101,6 @@ const displayUserComment = (comments) => {
             </p>        
         `
         userComment.appendChild(divDisplay1);
-       
-        
-
     })    
     
 }    
@@ -108,6 +108,7 @@ const displayUserComment = (comments) => {
 const handleShowHideUser = () => {
     const userDataTag = document.getElementById('user-data');
     const newCommentTag = document.getElementById('form-comentario');
+
     if (userDataTag.classList.contains('disabled')) {
         userDataTag.classList.remove('disabled');
         newCommentTag.classList.add('disabled');
@@ -115,6 +116,7 @@ const handleShowHideUser = () => {
     } else {
         userDataTag.classList.add('disabled');
         newCommentTag.classList.remove('disabled');
+        loadComment();
     }
 }
 
@@ -124,6 +126,7 @@ const UserComponent = {
         btnMeusDados.addEventListener('click', handleShowHideUser);
         const btnSairMDados = document.getElementById('btnSairMDados');
         btnSairMDados.addEventListener('click', handleShowHideUser);
+        
     }
 }
 

@@ -46,14 +46,15 @@ const main = `
             <div id="user-content">
 
             </div>
-            <button id="btnSairMDados" class="btn-submit btn btn-dark my-2 btn-sm ">Voltar</button>
-            <button id="btnVerLista" class="btn-submit btn btn-dark my-2 btn-sm">Comentário</button>
+            
+            <button id="btnSairMDados" class="btn btn-primary btn btn-dark my-2 btn-sm ">Voltar</button>
+            <button id="btnVerLista" class="btn btn-primary btn btn-dark my-2 btn-sm">Comentário</button>
+          
         </div>
         
     </div>
     <!--FEED: DISPLAY COMMENTS -->
     <div class="feed comments col my-3 p-3 bg-body rounded shadow">
-        <h6 class="border-bottom pb-2 mb-0">Feed</h6>
         <div id="comment-feed">
 
         </div>

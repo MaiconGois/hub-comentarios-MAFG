@@ -26,6 +26,21 @@ db.connect((err) => {
   console.log("Conectado com sucesso!");
 });
 
+server.get('/',(req, res) => {
+res.send(`
+<h1>Você Perdeu 50.000.000,00 de dolares</h1>
+<ul>
+<li><a href="http://localhost:7000/comment">GET: TODOS COMENTÁRIO</a></li>
+<li><a href="http://localhost:7000/user">GET: TODOS OS USUÁRIOS</a></li>
+<li><a href="http://localhost:7000/user-comment/6">GET: TODOS OS SEUS COMENTÁRIOS</a></li>
+</ul>
+
+
+
+`);
+})
+
+
 server.post("/login", (req, res) => {
   const { username, password } = req.body;
   db.query(
