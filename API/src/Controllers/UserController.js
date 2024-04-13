@@ -1,4 +1,4 @@
-const UserService = require('../Service/UserService');
+const UserService = require('../Services/UserService');
 
 
 const UserController ={
@@ -12,7 +12,7 @@ const UserController ={
     },
     getUsersById: (req, res) =>{
         const userId = req.params.id;
-        UserService.getUsersById(userId).
+        UserService.getBDUsersById(userId).
         then(result => {
             res.json({success: true, users: result})
         }).catch(err => {

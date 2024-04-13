@@ -1,8 +1,8 @@
 const express = require('express')
-const CommentRouter = express.Router()
 const CommentController = require('../Controllers/CommentController')
 
 
+const CommentRouter = express.Router()
 CommentRouter.get('/', CommentController.getComments)
 
 module.exports = CommentRouter

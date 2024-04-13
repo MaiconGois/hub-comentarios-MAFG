@@ -1,9 +1,9 @@
-const db = require('../db_connect');
+const db = require("../db_connect");
 
 const CommentService = {
-  getBDComments: ()=>{
+  getBDComments: () => {
     return new Promise((resolve, reject) => {
-    const queryByUser = `SELECT comment.id,
+      const queryByUser = `SELECT comment.id,
                               user.username as author,
                               comment.comment_text,
                               comment.created_at,
@@ -11,20 +11,15 @@ const CommentService = {
                           FROM comment
                       INNER JOIN user ON comment.userId = user.id
                       ORDER BY comment.updated_at DESC;`;
-  
-    db.query(queryByUser, (error, results) => {
-      if (error) {
-        return (error.message);
-      }
-      return (results)
+
+      db.query(queryByUser, (error, results) => {
+        if (error) {
+          return error.message;
+        }
+        return results;
+      });
     });
-  
-  })
+  },
+};
 
-}
-}
-
-
-
-
-  module.exports = CommentService;
+module.exports = CommentService;

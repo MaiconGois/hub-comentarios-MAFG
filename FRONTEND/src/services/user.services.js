@@ -3,6 +3,7 @@ import { mapComments } from "../models/comment.model.js";
 const URL_API = "http://localhost:7000";
 
 const UserService = {
+  
   apiGetUserComments: (userId) => {
     return new Promise((resolve, reject) => {
       fetch(`${URL_API}/user-comment/${userId}`)
@@ -17,5 +18,6 @@ const UserService = {
     });
   },
 };
+
 
 export default UserService;

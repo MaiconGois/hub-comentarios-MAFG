@@ -40,12 +40,15 @@ const handleLogin = (event) => {
     event.preventDefault();
     const { username, password } = getLoginInputs();
 
-    const usr = new User(null, username.value, password.value)
+    const usr = {
+        username: username.value,
+        password: password.value
+    }
 
     LoginService.apiAuthUser(usr).then(result => {
 
         StorageServices.user.store(result);
-        const currentUser = StorageServices.user.get();
+      
 
         userProfileTitle(currentUser.getFirstname())
         setAuthorCommentField(currentUser);
