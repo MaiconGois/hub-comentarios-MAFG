@@ -1,7 +1,7 @@
 import { formatDate, randomColors } from "../../utils.js";
 import { CommentService } from '../../services/comment.services.js'
 import { Comment } from "../../models/comment.model.js";
-import { StorageServices } from "../../services/localStorage.service.js";
+
 
 
 const getCommentInput = () => {
@@ -30,7 +30,7 @@ const submitComment = (event) => {
     event.preventDefault();
 
     const comment = {
-        userId: StorageServices.user.get().getId(),
+        userId: null,
         comment_text: getInputCommentValue()
     };
 
