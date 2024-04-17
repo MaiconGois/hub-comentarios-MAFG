@@ -2,10 +2,10 @@
 import UserService from "../../services/user.services.js";
 import { formatDate, randomColors } from "../../utils.js";
 import { loadComment } from "../../Components/CommentComponent/CommentComponent.js";
-
+import  {LoginService}  from "../../services/login.services.js";
 const loadUserData = () => {
-
-    displayUserData()
+    const user = LoginService.getUserSession();
+    displayUserData(user);
 }
 
 const iconeUsuario = (avatarColor) => {
@@ -66,7 +66,7 @@ const displayUserData = (user) => {
 }
 
 const handleMeusComentarios = ()=> {
-    const userId = null;
+    // const userId = null;
     UserService.apiGetUserComments(userId).then(data => {
         displayUserComment(data)
     }).catch(err => {
@@ -109,7 +109,7 @@ const handleShowHideUser = () => {
     const userDataTag = document.getElementById('user-data');
     const newCommentTag = document.getElementById('form-comentario');
 
-    if (userDataTag.classList.contains('disabled')) {
+    if (userDataTag.classList.contains('disabled')&& LoginService.isLoggedIn()) {
         userDataTag.classList.remove('disabled');
         newCommentTag.classList.add('disabled');
         loadUserData();

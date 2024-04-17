@@ -19,9 +19,9 @@ const clearCommentField = () => {
 }
 
 
-const setAuthorCommentField = (usr) => {
+const setCommentField = ({firstname, lastname}) => {
     const inputAuthor = document.getElementById('inputAuthor');
-    inputAuthor.value = usr.firstname + ' ' + usr.lastname;
+    inputAuthor.value = firstname + ' ' + lastname;
     inputAuthor.style.backgroundColor = '#444'
     inputAuthor.style.color = '#FFF'
 }
@@ -94,4 +94,4 @@ const CommentComponent = {
     },
 }
 
-export { CommentComponent, setInputComment, setAuthorCommentField, loadComment }
+export { CommentComponent, setInputComment, setCommentField, loadComment }

@@ -1,7 +1,6 @@
 const URL_API = "http://localhost:7000/session";
 import decodeJWT from "../../lib/decodeJWT.js";
-import {User} from "../../src/models/user.model.js";
-
+import { User } from "../../src/models/user.model.js";
 
 const LoginService = {
   apiAuthUser: (user) => {
@@ -39,7 +38,6 @@ const LoginService = {
           payload.firstname,
           payload.lastname
         );
-        console.log(user);
         return user;
       } else {
         return null;
@@ -49,20 +47,18 @@ const LoginService = {
   isLoggedIn: () => {
     const token = sessionStorage.getItem("token");
     if (!token) {
-    return false;
-    
-    }
-    try{
-      const tokenExpireTime = (decodeJWT(token).exp * 1000);
-      if (Date.now() >= tokenExpireTime) {
       return false;
+    }
+    try {
+      const tokenExpireTime = decodeJWT(token).exp * 1000;
+      if (Date.now() >= tokenExpireTime) {
+        return false;
       }
       return true;
-    }catch (error) {
+    } catch (error) {
       console.log(error);
-
     }
-  }
+  },
 };
 
-export { LoginService };
+export {LoginService};

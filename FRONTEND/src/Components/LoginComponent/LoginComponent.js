@@ -1,6 +1,6 @@
-import { User } from "../../models/user.model.js";
+
 import { LoginService } from "../../services/login.services.js";
-import { setAuthorCommentField } from "../CommentComponent/CommentComponent.js";
+import { setCommentField } from "../CommentComponent/CommentComponent.js";
 
 const getLoginInputs = () => {
   return {
@@ -14,15 +14,15 @@ const handleShowHide = () => {
   const loginTag = document.getElementById("login-form");
   const userProfile = document.getElementById("user-profile");
 
-  if (newCommentTag.classList.contains("disabled")) {
-    newCommentTag.classList.remove("disabled");
-    userProfile.classList.remove("disabled");
-    loginTag.classList.add("disabled");
-  } else {
-    newCommentTag.classList.add("disabled");
-    userProfile.classList.add("disabled");
-    loginTag.classList.remove("disabled");
-  }
+  if (newCommentTag.classList.contains('disabled') && LoginService.isLoggedIn()) {
+    newCommentTag.classList.remove('disabled');
+    userProfile.classList.remove('disabled');
+    loginTag.classList.add('disabled');
+} else if (!LoginService.isLoggedIn()) {
+    newCommentTag.classList.add('disabled');
+    userProfile.classList.add('disabled');
+    loginTag.classList.remove('disabled');
+}
 };
 
 const userProfileTitle = (name) => {
@@ -34,33 +34,29 @@ const userProfileTitle = (name) => {
     </p>`;
 };
 
-const setUser = (user)=> {
-  if(LoginService.isLoggedIn())
-  userProfileTitle(user.getUserSession())
-  setSignedUser(user)
+const setSignedUser = () => {
+  const user = LoginService.getUserSession()
+  userProfileTitle(user.getFirstname());
+  setCommentField(user);
+  handleShowHide();
+
 }
 
 const handleLogin = (event) => {
   event.preventDefault();
   const { username, password } = getLoginInputs();
-
-  const usr = new User(null, username.value, password.value);
-
-  LoginService.apiAuthUser(usr)
-    .then((result) => {
-      alert(result);
-      console.log(LoginService.getUserSession());
+  const usr = {
+      username: username.value,
+      password: password.value
+  }
+  LoginService.apiAuthUser(usr).then(result => {
+      alert(result)
+      setSignedUser()
       
-    userProfileTitle(user.getFirstname())
-    setAuthorCommentField(user);
-  
-      handleShowHide();
-    })
-    .catch((error) => {
-      alert(`Login inválido. Erro:${error.message}`);
-    });
-};
-
+  }).catch(error => {
+      alert(`Login inválido. Erro:${error.message}`)
+  })
+}
 const LoginComponent = {
   run: () => {
     const formLogin = document.getElementById("formLogin");
@@ -68,4 +64,4 @@ const LoginComponent = {
   },
 };
 
-export { LoginComponent };
+export { LoginComponent, setSignedUser };
