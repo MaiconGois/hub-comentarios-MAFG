@@ -2,8 +2,6 @@ import { formatDate, randomColors } from "../../utils.js";
 import { CommentService } from '../../services/comment.services.js'
 import { Comment } from "../../models/comment.model.js";
 
-
-
 const getCommentInput = () => {
     return document.getElementById('inputComment')
 }
@@ -17,7 +15,27 @@ const setInputComment = (commentValue) => {
 const clearCommentField = () => {
     getCommentInput().value = ''
 }
+const handleClick = (event) => {
+event.preventDefault()
+const alvo = event.target.closest('div').id.split('-')[1];
+console.log(alvo)
+if (event.type === 'click') {
+    const isToEdit = window.confirm('Você deseja editar o comentário')
+    if (isToEdit) {
+        console.log('Botão esquerdo')
+    }
+    
+} else if(event.type == 'contextmenu'){
+    console.log('Botão direito')
+    const isToEdit = window.confirm('Você deseja excluir o comentário?')
+    if (isToEdit) {
+        console.log('Botão direito')
+    }
+    
+}
 
+
+}
 
 const setCommentField = ({firstname, lastname}) => {
     const inputAuthor = document.getElementById('inputAuthor');
@@ -44,7 +62,6 @@ const submitComment = (event) => {
 }
 
 const loadComment = () => {
-    
     CommentService.apiGetComment().then(result => {
         const comments = result.map(
             (comment) => new Comment(comment.id, comment.userId, comment.author, comment.comment_text, comment.created_at, comment.updated_at)
@@ -88,6 +105,7 @@ const CommentComponent = {
     run: () => {
         const formComentario = document.getElementById('formComment')
         formComentario.addEventListener("submit", submitComment)
+
         window.onload = () => {
             loadComment();
         }

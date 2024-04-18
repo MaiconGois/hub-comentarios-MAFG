@@ -6,7 +6,7 @@ const UserService = {
   
   apiGetUserComments: (userId) => {
     return new Promise((resolve, reject) => {
-      fetch(`${URL_API}/user-comment/${userId}`)
+      fetch(`${URL_API}/comment/user/${userId}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.success) {

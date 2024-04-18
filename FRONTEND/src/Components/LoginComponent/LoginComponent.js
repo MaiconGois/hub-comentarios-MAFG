@@ -1,5 +1,5 @@
 
-import { LoginService } from "../../services/login.services.js";
+import  {LoginService}  from "../../services/login.services.js";
 import { setCommentField } from "../CommentComponent/CommentComponent.js";
 
 const getLoginInputs = () => {

@@ -3,6 +3,7 @@ import UserService from "../../services/user.services.js";
 import { formatDate, randomColors } from "../../utils.js";
 import { loadComment } from "../../Components/CommentComponent/CommentComponent.js";
 import  {LoginService}  from "../../services/login.services.js";
+import App from "../../view/app.js";
 const loadUserData = () => {
     const user = LoginService.getUserSession();
     displayUserData(user);
@@ -65,17 +66,16 @@ const displayUserData = (user) => {
     btnVerLista.addEventListener('click',handleMeusComentarios)
 }
 
-const handleMeusComentarios = ()=> {
-    // const userId = null;
-    UserService.apiGetUserComments(userId).then(data => {
-        displayUserComment(data)
-    }).catch(err => {
-       alert(err.message)
+const handleMeusComentarios = () => {
+    const user = LoginService.getUserSession();
+    UserService.apiGetUserComments(user.id).then(data => {
+        App.commentsUpdate(data, 'Meus Comentários')
+    }).catch(error => {
+        alert(error.message)
     })
 }
 
-
-const displayUserComment = (comments) => {
+const displayUserComments = (comments) => {
     const userComment = document.getElementById('comment-feed');
     userComment.innerHTML = ``
     userComment.innerHTML = `<h5 class="border-bottom pb-2 mb-0">Meus Comentários</h5>`
@@ -115,8 +115,10 @@ const handleShowHideUser = () => {
         loadUserData();
     } else {
         userDataTag.classList.add('disabled');
-        newCommentTag.classList.remove('disabled');
-        loadComment();
+        if (LoginService.isLoggedIn()) {
+            newCommentTag.classList.remove('disabled');
+        }
+        loadComment()
     }
 }
 

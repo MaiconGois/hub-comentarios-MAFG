@@ -33,6 +33,15 @@ const CommentController = {
         });
     });
   },
+  getDBCommentsById: (req, res) =>{
+    const id = req.params.id;
+    CommentService.getDBCommentsById(id).then(resultado =>{
+      res.json({success: true, comment: resultado});
+    }).catch(error =>{
+      res.status(500).json({success: false, error: `Internal server error: ${error.message}`})
+      
+    });
+  },
   addComment: (req, res) => {
     return new Promise((resolve, reject) => {
       const comment = req.body;
