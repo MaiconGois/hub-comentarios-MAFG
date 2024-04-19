@@ -14,7 +14,7 @@ body {
     border-radius: 10px;
 }
 
-.comments *{
+.comments * :not(.dropdown-menu, .date-style){
     display: block;
 }
 
@@ -30,6 +30,10 @@ body {
     border: none;
     background-color: antiquewhite;
     padding: 5px;
+}
+
+#form-comentario textarea {
+    height: 40px;
 }
 
 .btn-submit{
@@ -75,9 +79,8 @@ body {
 .btn {
     color:white;
     background-color: rgb(100,42,42);
-    padding-top: 10px;
 }
-.feed{
+#feed{
     max-height: 80vh;
 } 
 #comment-feed{
@@ -103,11 +106,17 @@ header{
 }
 
 #user-profile {
-    float: right;
-    margin: 20px 20px auto auto !important;
+    float: left;
+    margin: 20px auto auto 20px !important;
 }
 
 #user-profile p{
     margin: 5px 5px;
 }
 
+#btnMeusComentarios{
+    margin: 10px auto 0px auto;
+    padding: 10px auto 0px auto;
+    width: auto;
+    float: right;
+}

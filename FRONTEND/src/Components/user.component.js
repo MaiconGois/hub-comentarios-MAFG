@@ -1,9 +1,9 @@
+import UserService from "../services/user.service.js";
+import LoginService from "../services/login.service.js";
+import { randomColors } from "../utils.js";
+import { loadComment } from "./comment.component.js";
+import MainView from '../view/main.view.js';
 
-import UserService from "../../services/user.services.js";
-import { formatDate, randomColors } from "../../utils.js";
-import { loadComment } from "../../Components/CommentComponent/CommentComponent.js";
-import  {LoginService}  from "../../services/login.services.js";
-import App from "../../view/app.js";
 const loadUserData = () => {
     const user = LoginService.getUserSession();
     displayUserData(user);
@@ -32,9 +32,10 @@ const displayUserData = (user) => {
     userContent.innerHTML = ``
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
-
+    <div>
+    <button id='btnMeusComentarios' class='btn-submit btn btn-dark my-2'>Meus Comentários</button>
+    </div>
     ${iconeUsuario(randomColors().dark)}
-    
     <div class="row d-inline-flex text-body-secondary rounded">
         <div class="col-4">
             <label class="form-label" for="user_name">Nome</label>
@@ -61,55 +62,25 @@ const displayUserData = (user) => {
     </div>`
 
     userContent.appendChild(newDiv)
-   
-    const btnVerLista = document.getElementById('btnVerLista')
-    btnVerLista.addEventListener('click',handleMeusComentarios)
+
+    const btnMeusComentarios = document.getElementById('btnMeusComentarios');
+    btnMeusComentarios.addEventListener('click', handleMeusComentarios);
+
 }
 
 const handleMeusComentarios = () => {
     const user = LoginService.getUserSession();
     UserService.apiGetUserComments(user.id).then(data => {
-        App.commentsUpdate(data, 'Meus Comentários')
+        MainView.commentsUpdate(data, 'Meus Comentários')
     }).catch(error => {
         alert(error.message)
     })
 }
 
-const displayUserComments = (comments) => {
-    const userComment = document.getElementById('comment-feed');
-    userComment.innerHTML = ``
-    userComment.innerHTML = `<h5 class="border-bottom pb-2 mb-0">Meus Comentários</h5>`
-    comments.forEach(item => {
-        const divDisplay1 = document.createElement('div');
-        divDisplay1.className = 'd-flex text-body-secondary pt-3 border-bottom'
-        divDisplay1.innerHTML = `
-
-            <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
-                xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32"
-                preserveAspectRatio="xMidYMid slice" focusable="false">
-                <title>comentário</title>
-                <rect width="100%" height="100%" fill="#${randomColors().dark}"></rect>
-                <text x="35%" y="50%" fill="#${randomColors().light}"dy=".3em">${item.getAuthor().charAt(0)}</text>
-            </svg>
-            <p class="pb-3 mb-0 small lh-sm text-gray-dark">
-                <strong class="d-block text-gray-dark">@${item.getAuthor()}
-                <span class="date-style badge text-bg-secondary">${formatDate(item.getCreatedAt())}</span>
-                </strong>
-                <span class="comment">
-                ${item.getComment()}
-                </span>
-            </p>        
-        `
-        userComment.appendChild(divDisplay1);
-    })    
-    
-}    
-
 const handleShowHideUser = () => {
     const userDataTag = document.getElementById('user-data');
     const newCommentTag = document.getElementById('form-comentario');
-
-    if (userDataTag.classList.contains('disabled')&& LoginService.isLoggedIn()) {
+    if (userDataTag.classList.contains('disabled') && LoginService.isLoggedIn()) {
         userDataTag.classList.remove('disabled');
         newCommentTag.classList.add('disabled');
         loadUserData();
@@ -122,14 +93,17 @@ const handleShowHideUser = () => {
     }
 }
 
+// const listenerToBtnMeusDados = () => {
+//     const btnMeusDados = document.getElementById('btnMeusDados');
+//         btnMeusDados.addEventListener('click', handleShowHideUser);
+// }
+
 const UserComponent = {
     run: () => {
-        const btnMeusDados = document.getElementById('btnMeusDados');
-        btnMeusDados.addEventListener('click', handleShowHideUser);
+        
         const btnSairMDados = document.getElementById('btnSairMDados');
         btnSairMDados.addEventListener('click', handleShowHideUser);
-        
     }
 }
 
-export { UserComponent }
+export { UserComponent, handleShowHideUser }

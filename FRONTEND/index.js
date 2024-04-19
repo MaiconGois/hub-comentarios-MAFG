@@ -1,24 +1,23 @@
-import { LoginComponent, setSignedUser } from "../FRONTEND/src/Components/LoginComponent/LoginComponent.js";
-import { CommentComponent, loadComment } from "./src/Components/CommentComponent/CommentComponent.js";
-import { UserComponent } from "../FRONTEND/src/Components/UserComponent/UserComponent.js";
-import  App  from "./src/view/app.js";
-import {LoginService} from "../FRONTEND/src/services/login.services.js";
+import { LoginComponent, setSignedUser } from "./src/components/login.component.js";
+import { CommentComponent, loadComment } from "./src/components/comment.component.js";
+import { UserComponent } from "./src/components/user.component.js";
+import MainView from "./src/view/main.view.js";
+import LoginService from "./src/services/login.service.js";
 
 const main = {
     run: () => {
-        App.build();
+        MainView.build();
         LoginComponent.run();
         CommentComponent.run();
         UserComponent.run();
-        
     }
 }
+main.run();
 window.onload = () => {
-    main.run();
     if (LoginService.isLoggedIn()) {
         setSignedUser()
     }
-    
+
 }
 document.addEventListener("DOMContentLoaded", () => {
     if (LoginService.isLoggedIn()) {

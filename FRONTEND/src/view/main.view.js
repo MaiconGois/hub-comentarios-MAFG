@@ -1,21 +1,15 @@
+import { formatDate, randomColors } from "../utils.js";
 const header = `
+<!-- HEADER -->
 <header>
-<!-- USER PROFILE -->
-<div id="user-profile" class="flex-shrink-0 dropdown m-2 disabled">
-   <a id="user-profile-title" href="#" class="d-flex flex-row link-body-emphasis text-decoration-none " data-bs-toggle="dropdown"
-       aria-expanded="false">
-       
-   </a>
-   <ul class="dropdown-menu text-small shadow">
-       <li><a class="dropdown-item" href="#" id="btnMeusDados">Meus dados</a></li>
-       <li>
-           <hr class="dropdown-divider">
-       </li>
-       <li><a class="dropdown-item" id="btnSair" href="#">Sair</a></li>
-   </ul>
-</div>
+     <!-- USER PROFILE -->
+     <div id="user-profile" class="disabled">
+        <div id="user-profile-title">
+        </div>
+     </div>
 </header>
 `
+
 const main = `
 <main class="container">
 <div class="row">
@@ -33,8 +27,7 @@ const main = `
         <div class="comments shadow disabled" id="form-comentario">
             <h3>Novo Comentário</h3>
             <form id="formComment">
-                <label for="autor">Autor</label>
-                <input type="text" name="autor" id="inputAuthor" readonly>
+                <div id="authorProfile"></div>
                 <label for="comentario">Digite seu comentário</label>
                 <textarea name="comentario" id="inputComment" cols="30" rows="10" required></textarea>
                 <button type="submit" class="btn-submit btn btn-dark my-2">Enviar</button>
@@ -46,32 +39,23 @@ const main = `
             <div id="user-content">
 
             </div>
-            
-            <button id="btnSairMDados" class="btn btn-primary btn btn-dark my-2 btn-sm ">Voltar</button>
-            <button id="btnVerLista" class="btn btn-primary btn btn-dark my-2 btn-sm">Comentário</button>
-          
+            <button id="btnSairMDados" class="btn-submit btn btn-dark my-2">Voltar</button>
         </div>
-        
     </div>
     <!--FEED: DISPLAY COMMENTS -->
-    <div class="feed comments col my-3 p-3 bg-body rounded shadow">
-        <div id="comment-feed">
-
-        </div>
-        <small class="d-block text-end mt-3">
-            <a href="#">All updates</a>
-        </small>
+    <div id="feed" class="comments col my-3 p-3 bg-body rounded shadow">
     </div>
 </div>
 </main>
-
 `
 
-const App = {
-    build: () =>{
-        const appStruture = header + main;
+
+
+const MainView = {
+    build: () => {
+        const appStructure = header + main;
         document.body.innerHTML = ``;
-        document.body.innerHTML = appStruture;
+        document.body.innerHTML = appStructure;
     },
     commentsUpdate: (comments, title, handler) => {
         const divFeed = document.getElementById('feed');
@@ -86,6 +70,7 @@ const App = {
 
         comments.forEach(item => {
             const commentDiv = document.createElement('div');
+            commentDiv.setAttribute("id", `${item.getAuthor()}-${item.getId()}`);
             commentDiv.className = 'd-flex text-body-secondary pt-3 border-bottom'
             commentDiv.innerHTML = `
             <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32"
@@ -125,7 +110,6 @@ const App = {
 
 
     }
-
 }
 
-export default App
+export default MainView;

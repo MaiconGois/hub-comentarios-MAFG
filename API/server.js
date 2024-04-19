@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -20,8 +19,6 @@ const LoginRouter = require('./src/routes/login.route');
 server.use('/session', LoginRouter);
 
 const PORT = 7000;
-
-
 
 server.listen(PORT, () => {
     console.log(`O server está rodando em http://localhost:${PORT}`)

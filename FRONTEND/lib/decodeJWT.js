@@ -1,4 +1,3 @@
-
 const decodeJWT = (token) => {
     try {
         const base64Url = token.split('.')[1];

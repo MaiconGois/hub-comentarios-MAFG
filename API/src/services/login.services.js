@@ -1,4 +1,3 @@
-
 const jwt = require('jsonwebtoken');
 const db = require('../db_connect');
 
@@ -9,16 +8,17 @@ const LoginService = {
                 [username, password], (err, results) => {
                     if (err) {
                         reject(err);
-                    }else if (results.length > 0) {
+                    } else if (results.length > 0) {
                         const user = results[0];
-                        const token = jwt.sign(user, process.env.JWT_SECRET, {expiresIn: '1h'})
+                        const secretKey = process.env.JWT_SECRET; // Usando variável de ambiente
+                        const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
                         resolve(token);
                     } else {
                         reject('Usuário ou senha inválidos');
                     }
-                })
-        })
+                });
+        });
     }
-}
+};
 
 module.exports = LoginService;

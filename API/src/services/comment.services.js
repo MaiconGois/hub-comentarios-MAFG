@@ -18,27 +18,32 @@ const CommentService = {
             });
         });
     },
-    getDBCommentsById: (id) => {
+    getDBCommentById:(id) => {
         return new Promise((resolve, reject) => {
-            const query = `SELECT comment.id,
-                                user.username as author,
-                                comment.comment_text,
-                                comment.created_at,
-                                comment.updated_at
-                            FROM comment
-                        INNER JOIN user ON comment.userId = user.id
-                        WHERE comment.id =?`
-            db.query(query, [id], (error, results) => {
+            const query = `
+            SELECT comment.id,
+                    comment.userId,
+                    user.username as author,
+                    comment.comment_text,
+                    comment.created_at,
+                    comment.updated_at
+                    FROM comment
+                INNER JOIN user ON comment.userId = user.id
+                WHERE comment.id = ?
+            `
+            db.query(query, [id], (error, result) =>{
                 if (error) {
                     reject(error.message);
-                } if (results) {
-                    resolve(results);
-                }else {
+                }
+                if (result.length > 0) {
+                    resolve(result[0]);
+                } else {
                     reject('Comentário não encontrado');
                 }
-                
-            });
-        });
+            })
+
+
+        })
     },
     getDBCommentsByUserId: (userId) => {
         return new Promise((resolve, reject) => {
@@ -76,7 +81,7 @@ const CommentService = {
     },
     updateDBComment: ({ id, comment_text }) => {
         return new Promise((resolve, reject) => {
-            db.query('UPDATE comment SET comment_text =? WHERE id =?', [comment_text, id], (err, result) => {
+            db.query('UPDATE comment SET comment_text = ? WHERE id = ?', [comment_text, id], (err, result) => {
                 if (err) {
                     reject('Error updating comment');
                 }
