@@ -39,7 +39,9 @@ const main = `
             <div id="user-content">
 
             </div>
-            <button id="btnSairMDados" class="btn-submit btn btn-dark my-2">Voltar</button>
+
+            <button id="btnMeusComentarios" class="btn-submit btn btn-dark my-2 btn-sm">Comentário</button>
+            <button id="btnSairMDados" class="btn-submit btn btn-dark my-2 btn-sm ">Voltar</button>
         </div>
     </div>
     <!--FEED: DISPLAY COMMENTS -->

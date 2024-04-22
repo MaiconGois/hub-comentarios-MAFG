@@ -48,6 +48,9 @@
         setUsername(value) {
             this.username = value;
         }
+        getPassword() {
+            return this.password;
+        }
 
         setPassword(value) {
             this.password = value;

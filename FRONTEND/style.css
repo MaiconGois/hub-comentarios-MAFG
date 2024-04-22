@@ -39,7 +39,7 @@ body {
 .btn-submit{
     margin-top: 25px;
     padding: 10px;
-    width: 100px;
+    /* width: 100px; */
 }
 
 #login-form * {
@@ -114,9 +114,9 @@ header{
     margin: 5px 5px;
 }
 
-#btnMeusComentarios{
+#bntEditar{
     margin: 10px auto 0px auto;
     padding: 10px auto 0px auto;
-    width: auto;
+    /* width: auto; */
     float: right;
 }
