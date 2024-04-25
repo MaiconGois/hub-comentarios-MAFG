@@ -1,7 +1,7 @@
 import UserService from "../services/user.service.js";
 import LoginService from "../services/login.service.js";
 import { randomColors } from "../utils.js";
-import { loadComment } from "./comment.component.js";
+import { loadComment } from "../Components/comment.component.js";
 import MainView from '../view/main.view.js';
 
 const loadUserData = () => {
@@ -36,7 +36,8 @@ const displayUserData = (user) => {
     const newDiv = document.createElement('div');
     newDiv.innerHTML = `
     <div>
-    <button id='bntEditar' class='btn-submit btn btn-dark my-2'>Editar</button>
+    <button id='btnEditar' class='btn-submit btn btn-dark my-2' >Editar</button>
+    <button id='btnSalvar' class='btn-submit btn btn-success my-2' style='display: none'>Salvar</button>     
     </div>
     ${iconeUsuario(randomColors().dark)}
     <div class="row d-inline-flex text-body-secondary rounded">
@@ -71,8 +72,39 @@ const displayUserData = (user) => {
 
     userContent.appendChild(newDiv)
 
+  
     const btnMeusComentarios = document.getElementById('btnMeusComentarios');
     btnMeusComentarios.addEventListener('click', handleMeusComentarios);
+    const btnEditar = document.getElementById('btnEditar');
+    const btnSalvar = document.getElementById('btnSalvar');
+
+
+ 
+  
+  btnSalvar.addEventListener('click', () => {
+    const updatedUserData = {
+        firstname: document.getElementById('user_firstname').value,
+        lastname: document.getElementById('user_lastname').value,
+        username: document.getElementById('user_login').value,
+        password: document.getElementById('user_password').value,
+        imgLink: document.getElementById('user_imgLink').value
+    };
+
+    const inputs = document.querySelectorAll('#user-content input');
+    inputs.forEach(input => input.setAttribute('readonly', ''));
+    btnSalvar.style.display = 'none';
+    
+
+    UserService.updateUser(user.id, updatedUserData)
+    .then((updatedUser) => {
+        alert('Dados do usuário atualizados com sucesso!');
+        displayUserData(updatedUser);
+    })
+    .catch((error) => {
+        alert('Erro ao atualizar os dados do usuário: ' + error.message);
+    });
+});
+
 
 }
 

@@ -1,5 +1,6 @@
 body {
     font-family: Arial, sans-serif;
+    
 }
 
 .comments {
@@ -79,6 +80,7 @@ body {
 .btn {
     color:white;
     background-color: rgb(100,42,42);
+    
 }
 #feed{
     max-height: 80vh;
@@ -89,7 +91,10 @@ body {
     overflow-x: hidden;
     margin: 10px auto 0px auto;
 }
-
+#btnEditar, #btnSalvar{
+    position: absolute;
+    right: 60px;
+}
 #comment-feed::-webkit-scrollbar {
     width: 8px;
     height: 10px;

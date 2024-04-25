@@ -20,16 +20,14 @@ const UserController = {
         res.status(500).json({ success: false, error: error });
       });
   },
-  updateUser: async (req, res) => {
+  updateUser: (req, res) => {
     const userId = req.params.id;
-    const updatedUserData = req.body;
-
-    try {
-      const updatedUser = await UserService.updateUser(userId, updatedUserData);
-      res.json({ success: true, message: 'Usuário atualizado com sucesso', user: updatedUser });
-    } catch (error) {
-      res.status(500).json({ success: false, error: error.message });
-    }
+    UserService.updateDBUser(userId, req.body)
+     .then(() => {
+        res.json({ success: true, message: 'Usuário atualizado com sucesso!' });
+      }).catch((error) => {
+        res.status(500).json({ success: false, error: error.message });
+      });
   },
 };
 
